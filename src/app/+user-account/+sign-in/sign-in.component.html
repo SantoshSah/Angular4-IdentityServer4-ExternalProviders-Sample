@@ -1,0 +1,50 @@
+
+<md-card class="login-card" >
+    <div class="pad-bt-10">
+        <button md-raised-button color="primary" [routerLink]=" ['../../sign-up'] ">Create Ecommerce Seller Account</button>
+    </div>
+    <div class="pad-bt-10">
+        <button md-raised-button color="accent">Create Fulfilment Company Account</button>
+    </div>
+    <md-card-header>
+        <md-card-title>Existing User? Please Sign In</md-card-title>
+    </md-card-header>
+    <md-card-content>
+        <form (submit)="login(username, password)" [formGroup]="loginForm">
+        <div class="form-group" *ngIf="error">
+            {{error}}
+        </div>
+        <div class="form-group">
+            <md-form-field class="login-textboxe-full-width">
+                <input mdInput type="text" class="form-control" [(ngModel)]="username" formControlName="email"
+                name="username" placeholder="Enter your email">
+                <md-hint align="start" class="error" *ngIf= "!loginForm.controls['email'].valid && loginForm.controls['email'].touched">provide valid email</md-hint>
+            </md-form-field>
+        </div>
+        <div class="form-group">
+            <md-form-field class="login-textboxe-full-width">
+                <input mdInput type="password" class="form-control" [(ngModel)]="password" formControlName="password"
+                name="password" placeholder="Enter your password">
+                <md-hint align="start" class="error" *ngIf= "!loginForm.controls['password'].valid && loginForm.controls['password'].touched">password is required</md-hint>
+            </md-form-field>
+        </div>
+        <button md-raised-button color="accent" type="submit" [disabled]="!loginForm.valid || authLoader"> {{authLoader?'signing in...': 'Login'}}</button>
+        </form>
+    </md-card-content>
+    <md-card-actions>
+    </md-card-actions>
+    
+    <div class="pad-bt-10">
+        <google-signin
+        [clientId]="googleClientId"
+        [width]="100"
+        [theme]="dark"
+        [scope]="profile"
+        [longTitle]="true"
+        (googleSignInSuccess)="onGoogleSignInSuccess($event)">
+    </google-signin>
+    </div>
+    <div class="pad-bt-10">
+        <facebook-login (facebookSignInSuccess)="onFacebookSignInSuccess($event)"></facebook-login>
+    </div>
+</md-card>

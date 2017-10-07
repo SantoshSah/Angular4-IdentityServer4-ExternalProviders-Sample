@@ -1,0 +1,17 @@
+<md-card class="user-account-card">
+    <span *ngIf="!authService.authenticated()">
+        <a [routerLink]=" ['./sign-in'] ">
+          Sign In
+        </a>&nbsp;
+        <a [routerLink]=" ['./sign-up'] ">
+          Sign Up
+        </a>
+    </span>
+    <div *ngIf="authService.authenticated()">
+        <div>You are authenticated.</div>
+        <div>Account Name: {{userName}}</div>
+    </div>
+</md-card>
+<div class="child">
+    <router-outlet></router-outlet>
+</div>

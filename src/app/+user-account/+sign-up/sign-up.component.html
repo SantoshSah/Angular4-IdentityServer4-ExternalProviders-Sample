@@ -1,0 +1,67 @@
+<md-card class="sign-up-card">
+    <md-card-header>
+            <md-card-title>{{isExternalSignup?'External ':''}}Seller Sign Up</md-card-title>
+    </md-card-header>
+    <md-card-content>
+        <form (submit)="signup(name, phoneNumber, email, password, industry, storeWebAddress)" [formGroup]="signUpForm">
+            <div class="signup-form-group" *ngIf="error">
+                {{error}}
+            </div>
+            <div class="signup-form-group">
+                <md-form-field class="signup-textbox-full-width">
+                    <input mdInput type="text" class="form-control" [(ngModel)]="name" formControlName="name"
+                    name="name" placeholder="Enter your name">
+                </md-form-field>
+            </div>
+            <div class="signup-form-group">
+                <md-form-field class="signup-textbox-full-width">
+                    <input mdInput type="text" class="form-control" [(ngModel)]="phoneNumber" formControlName="phoneNumber"
+                    name="phoneNumber" placeholder="Enter your phone number">
+                    <!--<md-hint align="start" class="error" *ngIf= "!signUpForm.controls['phoneNumber'].valid && signUpForm.controls['phoneNumber'].touched">provide valid phone number</md-hint>-->
+                </md-form-field>
+            </div>
+            <div class="signup-form-group">
+                <md-form-field class="signup-textbox-full-width">
+                    <input mdInput type="text" class="form-control" [(ngModel)]="email" formControlName="email"
+                    name="email" placeholder="Enter your email">
+                    <!--<md-hint align="start" class="error" *ngIf= "!signUpForm.controls['email'].valid && signUpForm.controls['email'].touched">provide valid email</md-hint>-->
+                </md-form-field>
+            </div>
+            <div class="signup-form-group" *ngIf="!isExternalSignup">
+                <md-form-field class="login-textbox-full-width">
+                    <input mdInput type="password" class="form-control" [(ngModel)]="password" formControlName="password"
+                    name="password" placeholder="Enter your password">
+                    <!--<md-hint align="start" class="error" *ngIf= "!signUpForm.controls['password'].valid && signUpForm.controls['password'].touched">password is required</md-hint>-->
+                </md-form-field>
+            </div>
+            <div class="signup-form-group" *ngIf="!isExternalSignup">
+                <md-form-field class="login-textbox-full-width">
+                    <input mdInput type="password" class="form-control" formControlName="confirmpassword"
+                    name="confirmpassword" placeholder="Confirm your password">
+                    <!--<md-hint align="start" class="error" *ngIf= "!signUpForm.controls['confirmpassword'].valid && signUpForm.controls['confirmpassword'].touched">confirm password is required</md-hint>
+                    <md-hint align="start" class="error" *ngIf= "signUpForm.controls['confirmpassword'].touched && signUpForm.controls['password'].value != signUpForm.controls['confirmpassword'].value">confirm password should be matched</md-hint>-->
+                </md-form-field>
+            </div>
+
+            <div class="signup-form-group">
+                <md-form-field>
+                    <input mdInput type="text" class="form-control" [(ngModel)]="industry" formControlName="industry"
+                    name="industry" placeholder="Enter your industry">
+                    <!-- <md-hint align="start" class="error" *ngIf= "!signupForm.controls['industry'].valid && signupForm.controls['industry'].touched">industry is required</md-hint> -->
+                </md-form-field>
+            </div>
+            <div class="signup-form-group">
+                <md-form-field>
+                    <input mdInput type="text" class="form-control" [(ngModel)]="storeWebAddress" formControlName="storeWebAddress"
+                    name="storeWebAddress" placeholder="Enter your store web address">
+                    <!-- <md-hint align="start" class="error" *ngIf= "!signupForm.controls['storeWebAddress'].valid && signupForm.controls['storeWebAddress'].touched">Store Web Address is required</md-hint> -->
+                </md-form-field>
+            </div>
+            <button md-raised-button color="accent" type="submit" [disabled]="!signUpForm.valid || loader"> {{loader?'registering...': 'Signup'}}</button>
+            <button md-raised-button color="accent" type="button" [disabled]="loader" (click)="cancel()" >Cancel</button>
+        </form>
+    </md-card-content>
+    <md-card-actions>
+    </md-card-actions>
+</md-card>
+
